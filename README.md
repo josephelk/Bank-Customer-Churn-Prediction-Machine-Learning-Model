@@ -1,70 +1,65 @@
-# Bank-Customer-Churn-Prediction-Machine-Learning-Model
+# 📉 Bank Customer Churn Prediction
 
-🚀 Project Snapshot — Bank Customer Churn Prediction
-🔎 Project Overview
+> Predicting which bank customers are likely to churn using an end-to-end machine learning pipeline (EDA → preprocessing → modeling → tuning → evaluation).
 
-Built an end-to-end machine learning pipeline to predict customer churn in a retail banking dataset. The project covers EDA, preprocessing, model benchmarking, hyperparameter tuning, and evaluation.
+---
 
-🏆 Highlights
+## 🔎 Project Overview
+Built a **binary classification model** to identify customers at risk of leaving the bank.  
+The project covers:
+- Exploratory Data Analysis (EDA)
+- Data preprocessing (encoding, scaling, feature selection)
+- Model benchmarking & selection
+- Hyperparameter tuning with GridSearchCV
+- Model evaluation & interpretation
 
-Explored customer demographics, behavior, and account details to uncover churn patterns.
+---
 
-Engineered features by handling irrelevant columns, encoding categoricals, and scaling numerics.
+## 🏆 Highlights
+- 📊 **EDA** revealed churn imbalance, age & activity as strong churn indicators  
+- ⚙️ **Pipeline-based preprocessing** to prevent data leakage  
+- 🤖 **Model comparison**: Logistic Regression, KNN, SVM, Decision Tree, Random Forest, XGBoost  
+- 🌟 **Random Forest (tuned)** achieved the best ROC AUC score  
 
-Compared models (LogReg, KNN, SVM, Decision Tree, Random Forest, XGBoost) to identify the most effective approach.
+---
 
-Optimized Random Forest with GridSearchCV → achieving highest ROC AUC.
+## 🧾 Dataset
+| Column            | Description                              |
+|-------------------|------------------------------------------|
+| `customer_id`     | Unique customer identifier (dropped)     |
+| `credit_score`    | Creditworthiness score                   |
+| `country`         | Customer’s country of residence          |
+| `gender`          | Male/Female                              |
+| `age`             | Customer’s age                           |
+| `tenure`          | Years stayed with bank                   |
+| `balance`         | Account balance                          |
+| `num_of_products` | Number of products used                  |
+| `credit_card`     | Owns a credit card (1 = Yes, 0 = No)     |
+| `active_member`   | Active status (1 = Yes, 0 = No)          |
+| `estimated_salary`| Estimated annual salary                  |
+| `churn`           | Target (1 = churned, 0 = retained)       |
 
-📂 Dataset at a Glance
+---
 
-Size: ~10K customers
+## 📊 EDA Insights
+- Majority customers are retained → dataset is **imbalanced**  
+- Middle-aged customers with medium balances are more prone to churn  
+- Inactive customers show **significantly higher churn rate**  
+- Number of products strongly correlates with churn  
 
-Target: churn (1 = churned, 0 = retained)
+---
 
-Features: demographics (age, gender, country), account metrics (credit score, balance, products, tenure, salary), engagement (credit card, active status)
+## 🧠 Modeling
+- Models tested:  
+  `Logistic Regression | KNN | SVM | Decision Tree | Random Forest | XGBoost`  
+- **Random Forest** selected as final model (best trade-off of recall & precision)  
 
-📊 Key Insights from EDA
-
-Churn imbalance: majority are retained customers
-
-Age & balance: higher churn tendency in middle-aged customers with mid-level balances
-
-Active status: inactive customers churn more frequently
-
-Number of products: strong influence on churn probability
-
-🧠 Modeling & Evaluation
-
-Best Model: Random Forest Classifier
-
-Tuning: GridSearchCV (ROC AUC as primary scoring)
-
-Performance (tuned RF):
-
-Accuracy: ~0.86
-
-Recall (churn class): ~0.70
-
-Precision: ~0.85
-
-F1: ~0.77
-
-ROC AUC: High
-
-🎯 Impact
-
-Provides an interpretable model for customer retention strategies.
-
-Identifies at-risk customers early, allowing proactive engagement.
-
-Demonstrates a scalable ML pipeline (ColumnTransformer + Pipeline) for real-world datasets.
-
-📚 What I Learned
-
-Designing leak-free ML pipelines with train/test separation.
-
-Practical use of GridSearchCV for hyperparameter tuning.
-
-Communicating model performance using ROC curves and confusion matrices.
-
-Balancing business needs (catch more churners) with technical metrics (precision vs recall).
+### ⚙️ Fine-Tuning (GridSearchCV)
+```python
+param_grid = {
+  "n_estimators": [200, 400, 800],
+  "max_depth": [None, 10, 20, 30],
+  "min_samples_split": [2, 5, 10],
+  "min_samples_leaf": [1, 2, 4],
+  "max_features": ["sqrt", "log2"]
+}
