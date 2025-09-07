@@ -63,3 +63,39 @@ param_grid = {
   "min_samples_leaf": [1, 2, 4],
   "max_features": ["sqrt", "log2"]
 }
+```
+
+## 📈 Model Performance (Tuned Random Forest)
+
+| Metric           | Score  |
+|------------------|--------|
+| Accuracy         | ~0.86  |
+| Recall (Churn)   | ~0.70  |
+| Precision        | ~0.85  |
+| F1-Score         | ~0.77  |
+| ROC AUC          | High   |
+
+---
+
+## 🎯 Impact
+- Enables banks to **identify at-risk customers** early  
+- Helps target **retention campaigns** more efficiently  
+- Provides an **interpretable ML workflow** (feature importance, ROC analysis)  
+
+---
+
+## 📚 What I Learned
+- How to build **end-to-end ML pipelines** with scikit-learn  
+- Importance of avoiding **data leakage** (fit only on train data)  
+- Using **GridSearchCV** for model optimization  
+- Interpreting results with **ROC curve & confusion matrix**  
+- Balancing business needs (catch churners) vs technical metrics  
+
+---
+
+## 📌 Conclusion
+- **Random Forest** delivered the most reliable results among all models tested.  
+- The **ROC Curve & AUC score** were crucial in evaluating model quality beyond accuracy.  
+- Key churn drivers: `credit_score`, `age`, `balance`, `num_of_products`, and `active_member`.  
+- The project demonstrates how machine learning can support **data-driven decision making** in banking, especially for **customer retention strategies**.  
+
