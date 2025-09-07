@@ -77,6 +77,20 @@ param_grid = {
 
 ---
 
+## 📈 Model Performance (Random Forest)
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0 (Retained) | 0.88 | 0.96 | 0.92 | 1586 |
+| 1 (Churned)  | 0.77 | 0.47 | 0.59 | 414 |
+
+**Overall Performance**
+- Accuracy: **0.86**  
+- Macro Avg → Precision: 0.82 | Recall: 0.72 | F1-Score: 0.75  
+- Weighted Avg → Precision: 0.85 | Recall: 0.86 | F1-Score: 0.85  
+
+---
+
 ## 🎯 Impact
 - Enables banks to **identify at-risk customers** early  
 - Helps target **retention campaigns** more efficiently  
