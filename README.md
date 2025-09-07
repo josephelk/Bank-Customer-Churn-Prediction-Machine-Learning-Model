@@ -1,75 +1,70 @@
 # Bank-Customer-Churn-Prediction-Machine-Learning-Model
 
-Bank Customer Churn Prediction — End-to-End ML Pipeline
+🚀 Project Snapshot — Bank Customer Churn Prediction
+🔎 Project Overview
 
-Goal. Build a binary classifier that predicts whether a bank customer will churn (leave the bank). The project walks through EDA → preprocessing → model training → evaluation → interpretation, plus hyperparameter tuning with GridSearchCV.
+Built an end-to-end machine learning pipeline to predict customer churn in a retail banking dataset. The project covers EDA, preprocessing, model benchmarking, hyperparameter tuning, and evaluation.
 
-Dataset. Bank Customer Churn Prediction.csv
+🏆 Highlights
 
-Target: churn (0 = stay, 1 = churn)
+Explored customer demographics, behavior, and account details to uncover churn patterns.
 
-Examples of features: demographics and account signals (e.g., country, gender, age, tenure, balance, num_of_products, credit_card, active_member, estimated_salary, credit_score, …).
+Engineered features by handling irrelevant columns, encoding categoricals, and scaling numerics.
 
-Categorical columns: at least country, gender.
+Compared models (LogReg, KNN, SVM, Decision Tree, Random Forest, XGBoost) to identify the most effective approach.
 
-ID columns (e.g., customer_id) are dropped.
+Optimized Random Forest with GridSearchCV → achieving highest ROC AUC.
 
-1) EDA (Exploratory Data Analysis)
+📂 Dataset at a Glance
 
-Checked dataset shape, dtypes, and missing values (none reported in the notebook).
+Size: ~10K customers
 
-Reviewed numeric summaries (mean, std, min/max) and categorical distributions to spot imbalance and data quality.
+Target: churn (1 = churned, 0 = retained)
 
-Computed a correlation matrix for numeric features to see which variables move together (e.g., how balance, tenure, credit_score relate to churn).
+Features: demographics (age, gender, country), account metrics (credit score, balance, products, tenure, salary), engagement (credit card, active status)
 
-Looked at class balance of churn to anticipate metric choice (precision/recall/ROC-AUC) beyond accuracy.
+📊 Key Insights from EDA
 
-2) Preprocessing
+Churn imbalance: majority are retained customers
 
-Dropped identifier column (customer_id).
+Age & balance: higher churn tendency in middle-aged customers with mid-level balances
 
-Encoded categoricals:
+Active status: inactive customers churn more frequently
 
-country → One-Hot Encoding (no drop; handled with OneHotEncoder).
+Number of products: strong influence on churn probability
 
-gender → label/one-hot depending on the model.
+🧠 Modeling & Evaluation
 
-Train/test split is performed before fitting encoders/scalers (to avoid leakage).
+Best Model: Random Forest Classifier
 
-(If needed) Scaled numeric features with StandardScaler inside a ColumnTransformer + Pipeline.
+Tuning: GridSearchCV (ROC AUC as primary scoring)
 
-3) Modeling
+Performance (tuned RF):
 
-Baselines tried (imports are present in the notebook):
-LogisticRegression, KNeighborsClassifier, SVC, DecisionTreeClassifier, RandomForestClassifier, XGBClassifier.
+Accuracy: ~0.86
 
-Selected model in the notebook: Random Forest
-Rationale recorded in the notebook:
+Recall (churn class): ~0.70
 
-Slightly higher accuracy than alternatives.
+Precision: ~0.85
 
-Better precision (fewer false positives).
+F1: ~0.77
 
-More balanced macro/weighted averages on the classification report.
+ROC AUC: High
 
-Robust and easy to implement/interpret (feature importances).
+🎯 Impact
 
-4) Evaluation
+Provides an interpretable model for customer retention strategies.
 
-Held-out test set evaluation with accuracy and classification report (precision, recall, F1 by class).
+Identifies at-risk customers early, allowing proactive engagement.
 
-(Recommended) Add ROC curve and ROC-AUC to assess ranking performance under class imbalance.
+Demonstrates a scalable ML pipeline (ColumnTransformer + Pipeline) for real-world datasets.
 
-ROC in one line. The ROC curve plots TPR vs. FPR across thresholds; ROC-AUC summarizes this ranking quality (1.0 is perfect, 0.5 is chance). It tells you how well the model separates churners from non-churners regardless of a fixed probability cutoff.
+📚 What I Learned
 
-5) Hyperparameter Tuning (GridSearchCV)
+Designing leak-free ML pipelines with train/test separation.
 
-best_params_ → the hyperparameters that maximized CV ROC-AUC.
+Practical use of GridSearchCV for hyperparameter tuning.
 
-Compare test ROC-AUC, F1 (class 1), precision/recall (class 1) and the confusion matrix before vs. after tuning.
+Communicating model performance using ROC curves and confusion matrices.
 
-Prefer configs that raise recall for class 1 (churners) without tanking precision too much (business-dependent).
-
-6) Why you mustn’t fit scalers/encoders on the whole dataset
-
-Doing fit on the entire dataset (train + test) leaks information from the test set into preprocessing (means, stds, category levels), inflates CV/test scores, and breaks the fundamental principle that test data must simulate truly unseen data. Always fit on training data only, then transform validation/test data with those fitted objects.
+Balancing business needs (catch more churners) with technical metrics (precision vs recall).
