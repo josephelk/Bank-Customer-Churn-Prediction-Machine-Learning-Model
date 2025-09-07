@@ -65,18 +65,6 @@ param_grid = {
 }
 ```
 
-## 📈 Model Performance (Tuned Random Forest)
-
-| Metric           | Score  |
-|------------------|--------|
-| Accuracy         | ~0.86  |
-| Recall (Churn)   | ~0.70  |
-| Precision        | ~0.85  |
-| F1-Score         | ~0.77  |
-| ROC AUC          | High   |
-
----
-
 ## 📈 Model Performance (Random Forest)
 
 | Class | Precision | Recall | F1-Score | Support |
